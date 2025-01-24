@@ -1,0 +1,35 @@
+
+@media (max-width: 320px) {
+  #addATodo {
+    flex: 1 0 auto; /* Ensure the input grows to fill space */
+    width: 80%; /* Force the input to take full width */
+    min-width: 120px; /* Prevent the input from becoming too small */
+  }
+
+  #btn-addTodo {
+    width: 120px;
+    height: 30px;
+    border-radius: 4px;
+  }
+  #form-container{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+
+@media (max-width: 750px) {
+  #addATodo {
+    flex: 1 0 auto; /* Ensure the input grows to fill space */
+    width: 80%; /* Force the input to take full width */
+    min-width: 120px; /* Prevent the input from becoming too small */
+  }
+
+  #btn-addTodo {
+    width: 80%;
+    height: 30px;
+    border-radius: 4px;
+
+  }
+}

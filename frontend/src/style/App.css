@@ -1,0 +1,8 @@
+
+
+main {
+  flex: 1; /* Allows the main content to grow and push the footer down */
+  padding: 2rem; /* Add padding to avoid touching edges */
+}
+
+/* Footer stays at the bottom */

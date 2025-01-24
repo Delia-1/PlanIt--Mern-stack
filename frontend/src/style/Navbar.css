@@ -1,0 +1,51 @@
+nav {
+  margin-bottom: 50px;
+  background-image: linear-gradient(to right, #004D40, #2196F3);
+
+}
+#mid-container {
+  justify-content: space-between;
+}
+
+.logo-name {
+  color: white;
+  font-weight: 500px;
+}
+
+
+
+@media (max-width: 320px) {
+  nav {
+    padding: 10px; /* Reduce padding */
+    background-color: rgb(255, 0, 30);
+    height: 40px;
+  }
+
+  .navbar-logo {
+    height: 20px; /* Smaller logo */
+  }
+
+  .logo-name {
+    font-size: 1rem; /* Smaller text size */
+  }
+
+  #mid-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 750px) {
+  nav {
+    padding: 10px; /* Reduce padding */
+    background-color: rgb(255, 0, 30);
+    height: 50px;
+  }
+
+  .navbar-logo {
+    height: 30px; /* Smaller logo */
+  }
+
+  .logo-name {
+    font-size: 1.3rem; /* Smaller text size */
+  }
+}
