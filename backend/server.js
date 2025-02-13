@@ -1,4 +1,5 @@
 import express from 'express';
+import todoRoutes from './routes/todoRoutes.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -6,6 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+app.use('/api/todos', todoRoutes);
 const PORT = process.env.PORT || 5000;
 
 // ✅ Fix CORS: Allow Local & Deployed Frontend
@@ -15,16 +17,10 @@ const allowedOrigins = [
 ];
 
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-  }
-  if (req.method === "OPTIONS") {
-    return res.status(204).end();
-  }
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; connect-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+  );
   next();
 });
 
