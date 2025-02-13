@@ -16,7 +16,7 @@ PlanIt is a sleek, minimalist, and responsive to-do list app built with the MERN
 
 🛠️ Tech Stack
 
-    🎨Frontend
+   🎨 Frontend
 -->React.js: Core framework for building a responsive user interface.
 -->Vite: Ultra-fast development environment for lightning-fast builds.
 -->React Router: Enables seamless navigation between app pages.
