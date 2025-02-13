@@ -8,30 +8,27 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Correct CORS Configuration
-const allowedOrigins = [
-  "http://localhost:5173", // Local development
-  "https://plan-it-mern-stack-front.vercel.app" // Deployed frontend
-];
-
+// ✅ Fix CORS Issue
 app.use(cors({
-  origin: allowedOrigins,
+  origin: "*", // 🔹 Allow ALL origins (for testing) - Change to frontend domain in production
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
-// ✅ Express JSON Middleware (MUST be included before routes)
-app.use(express.json());
-
-// ✅ Fix Content Security Policy (CSP)
+// ✅ Manually Set CORS Headers (Extra Safety)
 app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; connect-src 'self' https://plan-it-mern-stack-front.vercel.app https://plan-it-mern-stack-back.vercel.app; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
-  );
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
   next();
 });
+
+// ✅ Middleware for JSON requests
+app.use(express.json());
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
