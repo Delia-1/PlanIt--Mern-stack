@@ -9,6 +9,7 @@ const TodoForm = ({ onAdd }) => {
   const addTodo = async () => {
     try {
       const response = await axios.post(`${API_URL}/api/todos`, { title: newTodo });
+
       onAdd(response.data);
       setNewTodo('');
     } catch (error) {
