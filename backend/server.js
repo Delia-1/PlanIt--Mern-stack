@@ -13,14 +13,14 @@ app.get("/", (req, res) => {
 
 // ✅ Fix CORS Issue
 app.use(cors({
-  origin: `https://plan-it-mern-stack-back.vercel.app`,
+  origin: `https://plan-it-mern-stack-front.vercel.app`,
   methods: "GET,POST,PUT,PATCH,DELETE",
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `https://plan-it-mern-stack-back.vercel.app`);
+  res.header("Access-Control-Allow-Origin", `https://plan-it-mern-stack-front.vercel.app`);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   if (req.method === "OPTIONS") {
