@@ -33,19 +33,6 @@ PlanIt is a sleek, minimalist, and responsive to-do list app built with the MERN
 -->MongoDB: A NoSQL database for storing tasks.
 -->Mongoose: Provides an easy interface for MongoDB schema definitions and operations.
 
-📂 Project Structure
-
-todo-mern/
-├── backend/       # Backend server files
-│   ├── models/    # Mongoose schemas
-│   ├── routes/    # API routes
-│   ├── server.js  # Main server file
-├── frontend/      # React application files
-│   ├── src/       # React source files
-│   ├── public/    # Public assets
-│   ├── vite.config.js # Vite configuration
-├── README.md      # Project documentation
-
 
 🎉 Features to Explore
 -->Responsive UI: Try resizing the app to see how it adapts to different screen sizes.
