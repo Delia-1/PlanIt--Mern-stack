@@ -8,7 +8,7 @@ import Confetti from 'react-confetti';
 const API_URL = import.meta.env.VITE_BACKEND_URL
 
 function TodoMain() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(["have success"]);
   const [showConfetti, setShowConfetti] = useState(false);
 
   const completedTodos = todos.filter((todo) => todo.completed).length;
