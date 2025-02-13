@@ -22,5 +22,5 @@ import todoRoutes from './routes/todoRoutes.js';
 app.use('/api/todos', todoRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running port ${PORT}`);
 });
