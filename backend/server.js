@@ -38,10 +38,11 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; connect-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+    "default-src 'self'; connect-src 'self' https://plan-it-mern-stack-front.vercel.app https://plan-it-mern-stack-back.vercel.app; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
   );
   next();
 });
+
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
