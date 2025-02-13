@@ -9,7 +9,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://plan-it-mern-stack-front.vercel.app" // Deployed frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS Not Allowed"));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Connect to MongoDB
