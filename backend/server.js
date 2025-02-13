@@ -7,9 +7,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.get("/", (req, res) => {
-  res.send("✅ Serveur Express fonctionne !");
-});
 
 // ✅ Fix CORS Issue
 app.use(cors({
@@ -33,7 +30,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 // ✅ Import Routes AFTER Middleware
 import todoRoutes from './routes/todoRoutes.js';
-app.use('/api/todos', todoRoutes);
+app.use('api/todos', todoRoutes);
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
