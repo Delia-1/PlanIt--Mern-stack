@@ -30,7 +30,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 // ✅ Import Routes AFTER Middleware
 import todoRoutes from './routes/todoRoutes.js';
-app.use('api/todos', todoRoutes);
+console.log("✅ Routes todoRoutes bien chargées");
+app.use('/api/todos', todoRoutes);
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
