@@ -3,14 +3,13 @@ import  { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style/TodoForm.css'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '');
-
+const API_URL = import.meta.env.VITE_BACKEND_URL
 
 const TodoForm = ({ onAdd }) => {
   const [newTodo, setNewTodo] = useState('');
   const addTodo = async () => {
     try {
-      const response = await axios.post(`${API_URL}/api/todos`, { title: newTodo });
+      const response = await axios.post(`${API_URL}api/todos`, { title: newTodo });
 
       onAdd(response.data);
       setNewTodo('');

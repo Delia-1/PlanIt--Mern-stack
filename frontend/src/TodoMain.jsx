@@ -5,8 +5,7 @@ import trash from './assets/trash.svg';
 import './style/todoMain.css';
 import Confetti from 'react-confetti';
 
-const API_URL = import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '');
-
+const API_URL = import.meta.env.VITE_BACKEND_URL
 
 function TodoMain() {
   const [todos, setTodos] = useState([]);
@@ -26,7 +25,7 @@ function TodoMain() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/todos`)
+      .get(`${API_URL}api/todos`)
       .then((res) => {
         setTodos(res.data);
       })
@@ -39,7 +38,7 @@ function TodoMain() {
     const wasCompleted = todo.completed; // Track the previous state
 
     axios
-      .patch(`${API_URL}/api/todos/${todo._id}`, { completed: !todo.completed })
+      .patch(`${API_URL}api/todos/${todo._id}`, { completed: !todo.completed })
       .then((res) => {
         updateTodoState(res.data);
 
@@ -56,7 +55,7 @@ function TodoMain() {
 
   const handleDeleteTodo = (todo) => {
     axios
-      .delete(`${API_URL}/api/todos/${todo._id}`)
+      .delete(`${API_URL}api/todos/${todo._id}`)
       .then(() => {
         setTodos(todos.filter((t) => t._id !== todo._id));
       })
