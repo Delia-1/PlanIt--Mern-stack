@@ -3,7 +3,7 @@ import  { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style/TodoForm.css'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '');
 
 
 const TodoForm = ({ onAdd }) => {

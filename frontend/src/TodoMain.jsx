@@ -5,7 +5,8 @@ import trash from './assets/trash.svg';
 import './style/todoMain.css';
 import Confetti from 'react-confetti';
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '');
+
 
 function TodoMain() {
   const [todos, setTodos] = useState([]);
