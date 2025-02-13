@@ -20,19 +20,18 @@ const allowedOrigins = [
   "https://plan-it-mern-stack-front.vercel.app" // Deployed frontend
 ];
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-  }
-  if (req.method === "OPTIONS") {
-    return res.status(204).end();
-  }
-  next();
-});
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: "GET, POST, PUT, DELETE, OPTIONS",
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true
+}));
 
 // ✅ Fix CSP Issue: Allow API Calls
 app.use((req, res, next) => {
@@ -42,8 +41,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
