@@ -4,7 +4,7 @@ import Todo from '../models/Todo.js';
 const router = express.Router();
 
 // Get all todos
-router.get('/', async (req, res) => {
+router.get('', async (req, res) => {
   try {
     const todos = await Todo.find();
     res.json(todos);
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Add a new todo
-router.post('/', async (req, res) => {
+router.post('', async (req, res) => {
   try {
     const newTodo = new Todo({
       title: req.body.title,
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update a todo
-router.patch('/:id', async (req, res) => {
+router.patch(':id', async (req, res) => {
   try {
     const updatedTodo = await Todo.findByIdAndUpdate(
       req.params.id,
@@ -41,7 +41,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a todo
-router.delete('/:id', async (req, res) => {
+router.delete(':id', async (req, res) => {
   try {
     await Todo.findByIdAndDelete(req.params.id);
     res.json({ message: 'Todo deleted' });
