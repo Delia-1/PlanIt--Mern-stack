@@ -1,39 +1,65 @@
 import { useState } from "react";
-import { loginUser } from "../api/api"; // ✅ Ensure `api.js` exists in `frontend/src/api/`
+import { loginUser } from "../api/api"; // ✅ Ensure API call works
+import { registerUser } from "../api/api"; // ✅ Import register function
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState(""); // ✅ Add username for sign-up
+  const [isRegistering, setIsRegistering] = useState(false); // ✅ Toggle between login/register
 
-  const handleLogin = async (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await loginUser(email, password); // ✅ Call imported `loginUser()`
-      alert(res.message);
-      window.location.reload(); // Reload the app to update authentication state
+      if (isRegistering) {
+        await registerUser(username, email, password);
+        alert("✅ Account created successfully! Please log in.");
+      } else {
+        const res = await loginUser(email, password);
+        alert(res.message);
+        navigate("/");
+      }
     } catch (err) {
-      alert(err.response?.data?.message || "An error occurred");
+      alert(err.response?.data?.message || "❌ Something went wrong.");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <h2>{isRegistering ? "Sign Up" : "Login"}</h2>
+      <form onSubmit={handleSubmit}>
+        {isRegistering && (
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+        )}
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+        />
+        <button type="submit">{isRegistering ? "Sign Up" : "Login"}</button>
+      </form>
+      <p onClick={() => setIsRegistering(!isRegistering)} style={{ cursor: "pointer", color: "blue" }}>
+        {isRegistering ? "Already have an account? Log in" : "Don't have an account? Sign up"}
+      </p>
+    </div>
   );
 };
 

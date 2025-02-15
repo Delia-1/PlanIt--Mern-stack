@@ -22,6 +22,16 @@ export const loginUser = async (email, password) => {
   }
 };
 
+export const registerUser = async (username, email, password) => {
+  try {
+    const response = await api.post(`${API_URL}/auth/register`, { username, email, password });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Registration error:", error);
+    throw error;
+  }
+};
+
 export const logoutUser = async () => {
   try {
     await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
