@@ -24,7 +24,7 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = async () => {
   try {
-    await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+    await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
     console.log("✅ Successfully logged out");
 
     localStorage.removeItem("authToken"); // ✅ Ensure token is cleared
