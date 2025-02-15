@@ -11,8 +11,10 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await logoutUser();
+      console.log("✅ Successfully logged out");
+
       navigate("/login", { replace: true });
-      window.location.reload(); // ✅ Ensure full logout state refresh
+      setTimeout(() => window.location.reload(), 500); // ✅ Ensure fresh state
     } catch (error) {
       console.error("❌ Logout failed:", error);
     }
