@@ -21,9 +21,9 @@ function App() {
         </header>
         <main style={{ paddingTop: "80px" }}>
           <Routes>
-            <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/auth" />} />
-            <Route path="/" element={isAuthenticated ? <TodoMain /> : <Navigate to="/auth/login" />} />
-            <Route path="*" element={<Navigate to={isAuthenticated ? "/auth" : "/auth/login"} />} />
+            <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
+            <Route path="/" element={isAuthenticated ? <TodoMain /> : <Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to={isAuthenticated ? "/" : "/login"} />} />
           </Routes>
         </main>
         <footer>
