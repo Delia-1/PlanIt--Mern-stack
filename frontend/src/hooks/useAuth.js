@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { checkAuth } from "../api/api.js"; // ✅ Ensure `api.js` exists in `frontend/src/api/`
 
 const useAuth = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(null);
 
   useEffect(() => {
     const verifyAuth = async () => { // ✅ Changed function name to avoid conflict
