@@ -14,7 +14,7 @@ function Navbar() {
       console.log("✅ Successfully logged out");
 
 
-        navigate("/login", { replace: true });
+        navigate("/auth/login", { replace: true });
         window.location.reload();
     } catch (error) {
       console.error("❌ Logout failed:", error);
