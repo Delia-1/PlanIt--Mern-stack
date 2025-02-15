@@ -1,12 +1,13 @@
 import express from 'express';
 import Todo from '../models/Todo.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 // Get all todos
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({userId: req.user.id});
     res.json(todos);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch todos' });
@@ -14,10 +15,11 @@ router.get('/', async (req, res) => {
 });
 
 // Add a new todo
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
   try {
     const newTodo = new Todo({
       title: req.body.title,
+      userId: req.user.id,
     });
     const savedTodo = await newTodo.save();
     res.status(201).json(savedTodo);
@@ -27,13 +29,14 @@ router.post('/', async (req, res) => {
 });
 
 // Update a todo
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', authMiddleware, async (req, res) => {
   try {
     const updatedTodo = await Todo.findByIdAndUpdate(
-      req.params.id,
+      {_id: req.params.id, userId: req.params.id},
       { completed: req.body.completed },
       { new: true }
     );
+    if (!updatedTodo) return res.status(404).json({ error: 'Todo not found' });
     res.json(updatedTodo);
   } catch (err) {
     res.status(500).json({ error: 'Failed to update todo' });
@@ -41,9 +44,10 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a todo
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    await Todo.findByIdAndDelete(req.params.id);
+    const todo = await Todo.findByIdAndDelete({_id: req.params.id, userId: req.params.id});
+    if (!todo) return res.status(404).json({ message: "Tâche non trouvée" });
     res.json({ message: 'Todo deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete todo' });

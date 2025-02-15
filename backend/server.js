@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -8,10 +9,14 @@ dotenv.config();
 const app = express();
 // ✅ Middleware for JSON requests
 app.use(express.json());
+app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
+// app.use(cors())
+
 
 // ✅ Fix CORS Issue
 app.use(cors({
+
   origin: `https://plan-it-mern-stack-front.vercel.app`,
   methods: "GET,POST,PUT,PATCH,DELETE",
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,10 +34,25 @@ app.use((req, res, next) => {
 });
 
 
+
+
+
+
+
 // ✅ Import Routes AFTER Middleware
 import todoRoutes from './routes/todoRoutes.js';
-console.log("✅ Routes todoRoutes bien chargées");
-app.use('/api/todos', todoRoutes);
+import authRoutes from './routes/auth.js';
+
+
+app.use('/todos', todoRoutes);
+app.use('/auth', authRoutes);
+
+// ✅ Debug: Log all routes
+app._router.stack.forEach((r) => {
+  if (r.route && r.route.path) {
+    console.log(`✅ Route available: ${r.route.path}`);
+  }
+});
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
