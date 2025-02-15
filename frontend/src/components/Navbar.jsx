@@ -13,8 +13,10 @@ function Navbar() {
       await logoutUser();
       console.log("✅ Successfully logged out");
 
-      navigate("/login", { replace: true });
-      setTimeout(() => window.location.reload(), 500); // ✅ Ensure fresh state
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+        window.location.reload();
+      }, 500);
     } catch (error) {
       console.error("❌ Logout failed:", error);
     }

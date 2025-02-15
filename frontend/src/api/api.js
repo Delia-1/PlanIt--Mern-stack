@@ -24,11 +24,12 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = async () => {
   try {
-    await api.post("/auth/logout");
+    await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
     console.log("✅ Successfully logged out");
+
+    localStorage.removeItem("authToken"); // ✅ Ensure token is cleared
   } catch (error) {
-    console.error("❌ Logout error:", error.response?.data || error.message);
-    throw error;
+    console.error("❌ Logout error:", error);
   }
 };
 
