@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "none",
     });
 
@@ -56,9 +56,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post ("/logout", (req, res) => {
-  res.clearCookie("token").json({ message: "Logged out" });
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  });
 
+  console.log("✅ Successfully cleared token from cookies");
+  return res.json({ message: "Logged out" });
 });
 
 export default router;
