@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, hashedPassword });
-    
+
     await newUser.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
@@ -52,6 +52,9 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      // sameSite: "lax",
+      // secure: false,
+
     });
 
 

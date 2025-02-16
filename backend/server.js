@@ -34,8 +34,11 @@ app.use((req, res, next) => {
 });
 
 
+// origin: `http://localhost:5173`,
+// res.header("Access-Control-Allow-Origin", `http://localhost:5173`);
 
-
+// origin: `https://plan-it-mern-stack-front.vercel.app`,
+// res.header("Access-Control-Allow-Origin", `https://plan-it-mern-stack-front.vercel.app`);
 
 
 

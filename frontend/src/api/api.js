@@ -2,6 +2,8 @@ import axios from "axios";
 
 // ✅ Fix the API base URL (Ensure it includes `/auth`)
 const API_URL = import.meta.env.VITE_BACKEND_URL || "https://plan-it-mern-stack-back.vercel.app";
+// const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/auth"
+
 
 // || "http://localhost:5000/auth"
 

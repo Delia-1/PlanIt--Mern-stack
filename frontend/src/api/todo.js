@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_BACKEND_URL || "https://plan-it-mern-stack-back.vercel.app";
+// const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"
 
 // || "http://localhost:5000"
 

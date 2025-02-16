@@ -30,7 +30,7 @@ function Navbar() {
         </Link>
 
         {/* ✅ Only show Logout button if user is authenticated */}
-        {isAuthenticated && <button onClick={handleLogout}>Logout</button>}
+        {isAuthenticated && <button className="btn btn-success" onClick={handleLogout}>Logout</button>}
       </div>
     </nav>
   );
